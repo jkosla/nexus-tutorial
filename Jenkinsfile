@@ -12,9 +12,7 @@ pipeline {
         stage('Upload Artifacts to Nexus') {
             steps {
                 script {
-                    def version = "1.0.${env.BUILD_NUMBER}"
-                    echo "Using version: ${version}"
-
+                    echo "Using version: ${BUILD_NUMBER}"
                     withCredentials([usernamePassword(credentialsId: 'Nexus-Credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                         sh '''
                         curl -v -u $NEXUS_USER:$NEXUS_PASS \
