@@ -25,17 +25,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            githubNotify(context: 'Pipeline', status: 'SUCCESS', description: 'Build succeeded')
-        }
-        failure {
-            githubNotify(context: 'Pipeline', status: 'FAILURE', description: 'Build failed')
-        }
-        always {
-            echo 'Pipeline completed.'
-            cleanWs()
-        }
-    }
 }
