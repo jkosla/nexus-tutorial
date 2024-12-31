@@ -1,14 +1,14 @@
-name: Java CI
-on: [push]
+name: Trigger Jenkins Job
+on:
+  push:
+    branches:
+      - main
 jobs:
-  jenkins-static-image-pipeline:
+  trigger-jenkins-job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses:
-          jenkinsci/jfr-static-image-action@master
-        with:
-          command: run
-          jenkinsfile: Jenkinsfile
-          pluginstxt: plugins.txt
-          jcasc: jcasc.yml
+      - name: Trigger Jenkins Job
+        run: |
+          curl -X POST http://20.160.102.102:8080/job/nexus_integration/build \
+            --user 'jenkins:1170cce40c2c9f53736bdbc5867d468a25'
+
