@@ -18,7 +18,7 @@ pipeline {
                     sh '''
                     curl -v -u $NEXUS_USER:$NEXUS_PASS \
                         --upload-file src/requirements.txt \
-                        http://20.160.102.102:8081/repository/tutorial/com/python/tutorial/requirements_artifact_id/version/requirements_artifact_id-${BUILD_NUMBER}.txt
+                        http://20.160.102.102:8081/repository/tutorial/com/python/tutorial/requirements_artifact_id/$(version)/requirements_artifact_id-${BUILD_NUMBER}.txt
                     '''
                 }
 
