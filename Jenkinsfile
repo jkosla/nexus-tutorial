@@ -16,7 +16,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'Nexus-Credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                         sh '''
                         curl -v -u $NEXUS_USER:$NEXUS_PASS \
-                            --upload-file src/requirements.txt \
+                            --upload-file src/require.txt \
                             http://20.160.102.102:8081/repository/tutorial/com/python/tutorial/requirements_artifact_id/${BUILD_NUMBER}/requirements_artifact_id-$BUILD_NUMBER.txt
                         '''
                     }
