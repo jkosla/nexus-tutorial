@@ -9,19 +9,19 @@ pipeline {
             }
         }
 
-        stage('Upload Artifacts to Nexus') {
-            steps {
-                script {
-                    echo "Using version: ${BUILD_NUMBER}"
-                    withCredentials([usernamePassword(credentialsId: 'Nexus-Credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
-                        sh '''
-                        curl -v -u $NEXUS_USER:$NEXUS_PASS \
-                            --upload-file src/requirements.txt \
-                            http://20.160.102.102:8081/repository/tutorial/com/python/tutorial/requirements_artifact_id/${BUILD_NUMBER}/requirements_artifact_id-$BUILD_NUMBER.txt
-                        '''
+         stage('Upload Artifacts to Nexus'){
+                    steps{
+                        script {
+                            def version = "1.0.${env.BUILD_NUMBER}"
+                            echo "Using version: ${version}"
+        
+                            nexusArtifactUploader artifacts: [[artifactId: 'requirements_artifact_id', 
+                                classifier: '', file: 'src/requirements.txt', type: 'txt']], 
+                                credentialsId: 'Nexus-Credentials', groupId: 'com.python.pis', 
+                                nexusUrl: '127.0.0.1:8081', nexusVersion: 'nexus3', 
+                                protocol: 'http', repository: 'Docs', version: version
+                        }
                     }
                 }
-            }
-        }
     }
 }
