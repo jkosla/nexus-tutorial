@@ -17,9 +17,9 @@ pipeline {
         
                             nexusArtifactUploader artifacts: [[artifactId: 'requirements_artifact_id', 
                                 classifier: '', file: 'src/requirements.txt', type: 'txt']], 
-                                credentialsId: 'Nexus-Credentials', groupId: 'com.python.pis', 
+                                credentialsId: 'Nexus-Credentials', groupId: 'com.python.app', 
                                 nexusUrl: '20.160.102.102:8081', nexusVersion: 'nexus3', 
-                                protocol: 'http', repository: 'Docs', version: version
+                                protocol: 'http', repository: 'tutorial', version: version
                         }
                     }
                 }
